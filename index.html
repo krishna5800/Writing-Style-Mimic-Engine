@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Writing Style Mimic Engine</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container nav-container">
+        <h1>Writing Style Mimic Engine</h1>
+        <ul>
+          <li><a href="#generate">Generate</a></li>
+          <li><a href="#compare">Compare</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <h2>Recreate Any Writing Style</h2>
+          <p>
+            Our advanced AI can generate text in specific writing styles or
+            compare the similarity between two texts.
+          </p>
+          <div class="hero-buttons">
+            <button id="scrollToGenerate">Generate Text</button>
+            <button id="scrollToCompare" class="secondary-button">
+              Compare Styles
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="generate" class="feature-section">
+        <div class="section-header">
+          <h2>Generate Text</h2>
+          <p>
+            Enter a prompt and select a writing style to generate text with that
+            style.
+          </p>
+        </div>
+
+        <div class="card generation-card">
+          <div class="input-container">
+            <label for="promptInput">Your Prompt</label>
+            <textarea
+              id="promptInput"
+              placeholder="Enter your starting text or prompt here..."
+            ></textarea>
+
+            <div class="style-selection">
+              <label for="styleSelect">Writing Style</label>
+              <div class="select-wrapper">
+                <select id="styleSelect">
+                  <option value="formal">Formal</option>
+                  <option value="casual">Casual</option>
+                  <option value="technical">Technical</option>
+                  <option value="creative">Creative</option>
+                  <option value="shakespearean">Shakespearean</option>
+                  <option value="hemingway">Hemingway</option>
+                  <option value="academic">Academic</option>
+                  <option value="journalistic">Journalistic</option>
+                  <option value="custom">Custom Style...</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="customStyleContainer" class="hidden">
+              <label for="customStyle">Custom Style Description</label>
+              <textarea
+                id="customStyle"
+                placeholder="Describe the writing style you want to mimic..."
+              ></textarea>
+            </div>
+
+            <button id="generateButton">Generate Text</button>
+          </div>
+
+          <div class="output-container">
+            <div class="output-header">
+              <h3>Generated Output</h3>
+              <div class="output-actions">
+                <button
+                  id="copyOutput"
+                  class="icon-button"
+                  title="Copy to clipboard"
+                >
+                  <i class="fas fa-copy"></i>
+                </button>
+                <button
+                  id="downloadOutput"
+                  class="icon-button"
+                  title="Download as text file"
+                >
+                  <i class="fas fa-download"></i>
+                </button>
+              </div>
+            </div>
+            <div id="generationStatus" class="status-indicator">Ready</div>
+            <div id="generatedText" class="output-text">
+              Your generated text will appear here...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="compare" class="feature-section">
+        <div class="section-header">
+          <h2>Compare Writing Styles</h2>
+          <p>Input two texts to analyze and compare their writing styles.</p>
+        </div>
+
+        <div class="card comparison-card">
+          <div class="comparison-inputs">
+            <div class="comparison-input">
+              <label for="text1">Text 1</label>
+              <textarea
+                id="text1"
+                placeholder="Enter the first text for comparison..."
+              ></textarea>
+            </div>
+
+            <div class="comparison-input">
+              <label for="text2">Text 2</label>
+              <textarea
+                id="text2"
+                placeholder="Enter the second text for comparison..."
+              ></textarea>
+            </div>
+          </div>
+
+          <button id="compareButton">Compare Styles</button>
+
+          <div class="model-selection">
+            <label class="toggle-switch">
+              <input type="checkbox" id="useImprovedModel" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Use Improved Model</span>
+            <span
+              class="toggle-info"
+              title="The improved model has better accuracy for detecting texts by the same author, especially for J.K. Rowling's works"
+              >ℹ️</span
+            >
+          </div>
+
+          <div id="comparisonStatus" class="status-indicator">Ready</div>
+
+          <div id="comparisonResult" class="comparison-result hidden">
+            <div class="similarity-score">
+              <h3>Similarity Score</h3>
+              <div class="score-display">
+                <div id="scoreValue">0%</div>
+                <div class="score-bar-container">
+                  <div id="scoreBar" class="score-bar"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="similarity-description">
+              <h3>Style Analysis</h3>
+              <p id="similarityDescription">
+                Submit two texts to see their similarity analysis.
+              </p>
+            </div>
+
+            <div class="authorship-verdict">
+              <h3>Authorship Assessment</h3>
+              <div class="verdict-display">
+                <div class="verdict-label">Same Author?</div>
+                <div id="verdictValue" class="verdict-value">Unknown</div>
+                <div id="verdictConfidence" class="verdict-confidence"></div>
+              </div>
+              <p id="verdictExplanation">
+                Submit two texts to see authorship assessment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="section-header">
+          <h2>About the Writing Style Mimic Engine</h2>
+        </div>
+
+        <div class="card about-card">
+          <div class="about-content">
+            <p>
+              This tool is designed for creative writers, educators, students,
+              digital forensics experts, and anyone interested in exploring
+              writing styles. Our advanced algorithms can:
+            </p>
+
+            <ul>
+              <li>Generate text that mimics specific writing styles</li>
+              <li>
+                Compare and analyze the similarity between different texts
+              </li>
+              <li>
+                Help you understand the distinctive elements of various writing
+                styles
+              </li>
+            </ul>
+
+            <div class="audience-cards">
+              <div class="audience-card">
+                <i class="fas fa-pen-fancy"></i>
+                <h3>Creative Writers</h3>
+                <p>
+                  Experiment with different writing styles to enhance your
+                  creativity.
+                </p>
+              </div>
+
+              <div class="audience-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Educators & Students</h3>
+                <p>
+                  Analyze writing patterns and learn from different stylistic
+                  approaches.
+                </p>
+              </div>
+
+              <div class="audience-card">
+                <i class="fas fa-search"></i>
+                <h3>Forensic Analysis</h3>
+                <p>
+                  Compare text samples to identify authorship patterns and
+                  similarities.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 MIT WPU WRMe</p>
+      </div>
+    </footer>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="loading-spinner"></div>
+      <p id="loadingMessage">Processing your request...</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
